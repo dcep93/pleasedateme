@@ -5,6 +5,8 @@ export default function PleaseDateMe() {
   return <Wrapper />;
 }
 
+const movieSuffixes = ["mp4", "mov"];
+
 const assets = [
   "0032.jpg",
   "0037.jpg",
@@ -69,16 +71,27 @@ class Wrapper extends FirebaseWrapper<{ [userId: string]: DataType }> {
                       display: "inline-block",
                     }}
                   >
-                    <img
-                      style={{
-                        width: "auto",
-                        maxWidth: "400px",
-                        maxHeight: "400px",
-                        display: "inline",
-                      }}
-                      src={`/assets/${assetId}`}
-                      alt={"broken"}
-                    />
+                    {movieSuffixes.find((suffix) =>
+                      assetId.toLowerCase().endsWith(suffix)
+                    ) !== undefined ? (
+                      <video
+                        controls
+                        style={{
+                          maxWidth: "400px",
+                          maxHeight: "400px",
+                        }}
+                        src={`/assets/${assetId}`}
+                      ></video>
+                    ) : (
+                      <img
+                        style={{
+                          maxWidth: "400px",
+                          maxHeight: "400px",
+                        }}
+                        src={`/assets/${assetId}`}
+                        alt={"broken"}
+                      />
+                    )}
                   </div>
                 </div>
               </div>
