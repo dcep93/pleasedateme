@@ -4,6 +4,16 @@
 import React from "react";
 import firebase from "./firebase";
 
+export type DataType = {
+  userId: string;
+  userName: string;
+  scores: { [id: string]: { score: number; comment: string } };
+};
+
+function setData(data: DataType): Promise<void> {
+  return firebase._set(data.userId, data);
+}
+
 export class FirebaseWrapper<T> extends React.Component<{}, { state: T }> {
   static firebaseWrapperComponent: FirebaseWrapper<any>;
   componentDidMount() {
@@ -35,6 +45,6 @@ export class FirebaseWrapper<T> extends React.Component<{}, { state: T }> {
   }
 }
 
-const ex = {};
+const ex = { setData };
 
 export default ex;
