@@ -1,7 +1,7 @@
 import { createRef } from "react";
 import { JSX } from "react/jsx-runtime";
 import Asset, { bubbleStyle } from "./Asset";
-import { DataType, FirebaseWrapper } from "./firebase";
+import firebase, { DataType, FirebaseWrapper } from "./firebase";
 
 export default function PleaseDateMe() {
   return <Wrapper />;
@@ -31,17 +31,48 @@ const assets = [
   "roses.mp4",
 ];
 
-const myName = localStorage.getItem("myname");
+const storageKey = "me";
+
+const myStorageValue: { myId: string; myName: string } = JSON.parse(
+  localStorage.getItem(storageKey) || "{}"
+);
 
 class Wrapper extends FirebaseWrapper<{ [userId: string]: DataType }> {
   render(): JSX.Element {
     const ref = createRef<HTMLInputElement>();
-    const setMyName = (myName: string) => {
-      localStorage.setItem("myname", myName);
-      window.location.reload();
-    };
-    if (!myName) {
-      setMyName(Math.floor(Date.now()).toString());
+    const setMyName = (myName: string) =>
+      Promise.resolve()
+        .then(() =>
+          firebase.setData({
+            userId: myStorageValue.myId,
+            userName: myStorageValue.myName,
+            responses: this.state.state[myStorageValue.myId]?.responses,
+          })
+        )
+        .then(() =>
+          localStorage.setItem(
+            storageKey,
+            JSON.stringify({ ...myStorageValue, myName })
+          )
+        )
+        .then(() => window.location.reload());
+
+    if (!myStorageValue.myId) {
+      const myId = Math.floor(Date.now()).toString();
+      Promise.resolve()
+        .then(() =>
+          firebase.setData({
+            userId: myId,
+            userName: myId,
+          })
+        )
+        .then(() =>
+          localStorage.setItem(
+            storageKey,
+            JSON.stringify({ myId, myName: myId })
+          )
+        )
+        .then(() => window.location.reload());
       return <div></div>;
     }
     const submit = () =>
@@ -54,7 +85,11 @@ class Wrapper extends FirebaseWrapper<{ [userId: string]: DataType }> {
           <h1>pleasedateme</h1>
           <div>
             your name:{" "}
-            <input ref={ref} onSubmit={submit} defaultValue={myName!} />
+            <input
+              ref={ref}
+              onSubmit={submit}
+              defaultValue={myStorageValue.myName}
+            />
             <button onClick={submit}>update</button>
           </div>
         </div>
