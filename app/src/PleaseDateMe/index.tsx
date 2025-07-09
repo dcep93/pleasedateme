@@ -36,15 +36,18 @@ const myName = localStorage.getItem("myname");
 class Wrapper extends FirebaseWrapper<{ [userId: string]: DataType }> {
   render(): JSX.Element {
     const ref = createRef<HTMLInputElement>();
-    if (!myName) {
-      localStorage.setItem("myname", Math.floor(Date.now()).toString());
+    const setMyName = (myName: string) => {
+      localStorage.setItem("myname", myName);
       window.location.reload();
+    };
+    if (!myName) {
+      setMyName(Math.floor(Date.now()).toString());
       return <div></div>;
     }
     const submit = () =>
       Promise.resolve()
         .then(() => ref.current!.value)
-        .then(alert);
+        .then(setMyName);
     return (
       <div>
         <div style={bubbleStyle}>
