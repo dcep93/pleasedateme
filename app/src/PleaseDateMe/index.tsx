@@ -1,3 +1,4 @@
+import { createRef } from "react";
 import { JSX } from "react/jsx-runtime";
 import Asset, { bubbleStyle } from "./Asset";
 import { DataType, FirebaseWrapper } from "./firebase";
@@ -30,14 +31,28 @@ const assets = [
   "roses.mp4",
 ];
 
+const myName = localStorage.getItem("myname");
+
 class Wrapper extends FirebaseWrapper<{ [userId: string]: DataType }> {
   render(): JSX.Element {
+    const ref = createRef<HTMLInputElement>();
+    if (!myName) {
+      localStorage.setItem("myname", Math.floor(Date.now()).toString());
+      window.location.reload();
+      return <div></div>;
+    }
+    const submit = () =>
+      Promise.resolve()
+        .then(() => ref.current!.value)
+        .then(alert);
     return (
       <div>
         <div style={bubbleStyle}>
           <h1>pleasedateme</h1>
           <div>
-            your name: <input></input>
+            your name:{" "}
+            <input ref={ref} onSubmit={submit} defaultValue={myName!} />
+            <button onClick={submit}>update</button>
           </div>
         </div>
         <div>
