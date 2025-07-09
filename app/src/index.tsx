@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import PleaseDateMe from "./app";
+import PleaseDateMe from "./PleaseDateMe";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 
