@@ -29,19 +29,60 @@ const assets = [
   "roses.mp4",
 ];
 
+const bubbleStyle = {
+  display: "inline-block",
+  borderRadius: "1em",
+  border: "2px solid black",
+  padding: "0.7em",
+  margin: "0.5em",
+  backgroundColor: "white",
+};
+
 class Wrapper extends FirebaseWrapper<{ [userId: string]: DataType }> {
   render(): JSX.Element {
     return (
       <div>
-        <div>
+        <div style={bubbleStyle}>
           <h1>pleasedateme</h1>
           <div>
-            name: <input></input>
+            your name: <input></input>
           </div>
         </div>
         <div>
           {assets.map((assetId, i) => (
-            <div key={i}></div>
+            <div key={i}>
+              <div style={bubbleStyle}>
+                <div
+                  style={{
+                    display: "inline-flex",
+                    flexDirection: "column",
+                    minWidth: 0,
+                    alignItems: "flex-start",
+                    width: "auto",
+                  }}
+                >
+                  <div style={{ display: "inline-block", width: "100%" }}>
+                    {assetId}
+                  </div>
+                  <div
+                    style={{
+                      display: "inline-block",
+                    }}
+                  >
+                    <img
+                      style={{
+                        width: "auto",
+                        maxWidth: "400px",
+                        maxHeight: "400px",
+                        display: "inline",
+                      }}
+                      src={`/assets/${assetId}`}
+                      alt={"broken"}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </div>
