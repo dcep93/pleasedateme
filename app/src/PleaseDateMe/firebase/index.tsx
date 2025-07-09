@@ -7,7 +7,7 @@ import firebase from "./firebase";
 export type DataType = {
   userId: string;
   userName: string;
-  scores: { [id: string]: { score: number; comment: string } };
+  scores: { [assetId: string]: { score: number; comment: string } };
 };
 
 function setData(data: DataType): Promise<void> {
