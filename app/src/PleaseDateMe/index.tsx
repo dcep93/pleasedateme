@@ -1,11 +1,10 @@
 import { JSX } from "react/jsx-runtime";
+import Asset, { bubbleStyle } from "./Asset";
 import { DataType, FirebaseWrapper } from "./firebase";
 
 export default function PleaseDateMe() {
   return <Wrapper />;
 }
-
-const movieSuffixes = ["mp4", "mov"];
 
 const assets = [
   "0032.jpg",
@@ -31,15 +30,6 @@ const assets = [
   "roses.mp4",
 ];
 
-const bubbleStyle = {
-  display: "inline-block",
-  borderRadius: "1em",
-  border: "2px solid black",
-  padding: "0.7em",
-  margin: "0.5em",
-  backgroundColor: "white",
-};
-
 class Wrapper extends FirebaseWrapper<{ [userId: string]: DataType }> {
   render(): JSX.Element {
     return (
@@ -52,50 +42,7 @@ class Wrapper extends FirebaseWrapper<{ [userId: string]: DataType }> {
         </div>
         <div>
           {assets.map((assetId, i) => (
-            <div key={i}>
-              <div style={bubbleStyle}>
-                <div
-                  style={{
-                    display: "inline-flex",
-                    flexDirection: "column",
-                    minWidth: 0,
-                    alignItems: "flex-start",
-                    width: "auto",
-                  }}
-                >
-                  <div style={{ display: "inline-block", width: "100%" }}>
-                    {assetId}
-                  </div>
-                  <div
-                    style={{
-                      display: "inline-block",
-                    }}
-                  >
-                    {movieSuffixes.find((suffix) =>
-                      assetId.toLowerCase().endsWith(suffix)
-                    ) !== undefined ? (
-                      <video
-                        controls
-                        style={{
-                          maxWidth: "400px",
-                          maxHeight: "400px",
-                        }}
-                        src={`/assets/${assetId}`}
-                      ></video>
-                    ) : (
-                      <img
-                        style={{
-                          maxWidth: "400px",
-                          maxHeight: "400px",
-                        }}
-                        src={`/assets/${assetId}`}
-                        alt={"broken"}
-                      />
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Asset key={i} assetId={assetId} />
           ))}
         </div>
       </div>
