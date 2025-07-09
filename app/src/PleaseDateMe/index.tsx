@@ -31,6 +31,20 @@ const assets = [
 
 class Wrapper extends FirebaseWrapper<{ [userId: string]: DataType }> {
   render(): JSX.Element {
-    return <div>pleasedateme</div>;
+    return (
+      <div>
+        <div>
+          <h1>pleasedateme</h1>
+          <div>
+            name: <input></input>
+          </div>
+        </div>
+        <div>
+          {assets.map((assetId, i) => (
+            <div key={i}></div>
+          ))}
+        </div>
+      </div>
+    );
   }
 }
