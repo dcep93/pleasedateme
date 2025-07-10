@@ -22,7 +22,7 @@ class Wrapper extends FirebaseWrapper<StateType> {
           firebase.setData({
             userId: myStorageValue.myId,
             userName: myStorageValue.myName,
-            responses: this.state.state[myStorageValue.myId]?.responses || {},
+            responses: this.state.state?.[myStorageValue.myId]?.responses || {},
           })
         )
         .then(() =>
