@@ -1,6 +1,7 @@
-import { DataType } from "./firebase";
+import { createRef } from "react";
+import firebase, { DataType } from "./firebase";
 
-const movieSuffixes = ["mp4", "mov"];
+const movieSuffixes = [".mp4", ".mov"];
 
 export const bubbleStyle = {
   display: "inline-block",
@@ -37,62 +38,137 @@ const assets = [
   "roses.mp4",
 ];
 
-export default function Assets(props: { state: StateType }) {
+export default function Assets(props: {
+  state: StateType;
+  myId: string;
+  myName: string;
+}) {
+  const myResponses = props.state[props.myId] || {
+    userId: props.myId,
+    userName: props.myName,
+  };
   return (
     <div>
-      {assets.map((assetId, i) => (
-        <div key={i}>
-          <div style={bubbleStyle}>
-            <div style={{ display: "flex" }}>
-              <div
-                style={{
-                  display: "inline-flex",
-                  flexDirection: "column",
-                  minWidth: 0,
-                  alignItems: "flex-start",
-                  width: "auto",
-                }}
-              >
-                <div style={{ display: "inline-block", width: "100%" }}>
-                  {assetId}
-                </div>
+      {assets
+        .map((assetId) => ({
+          assetId,
+          assetKey: assetId.replaceAll(".", "_"),
+          scoreRef: createRef<HTMLInputElement>(),
+          commentRef: createRef<HTMLTextAreaElement>(),
+        }))
+        .map((o) => ({ ...o, myResponse: myResponses.responses?.[o.assetKey] }))
+        .map((o, i) => (
+          <div key={i}>
+            <div style={bubbleStyle}>
+              <div style={{ display: "flex" }}>
                 <div
                   style={{
-                    display: "inline-block",
+                    display: "inline-flex",
+                    flexDirection: "column",
+                    minWidth: 0,
+                    alignItems: "flex-start",
+                    width: "auto",
                   }}
                 >
-                  {movieSuffixes.find((suffix) =>
-                    assetId.toLowerCase().endsWith(suffix)
-                  ) !== undefined ? (
-                    <video
-                      controls
-                      style={{
-                        maxWidth: "400px",
-                        maxHeight: "400px",
-                      }}
-                      src={`/assets/${assetId}`}
-                    ></video>
-                  ) : (
-                    <img
-                      style={{
-                        maxWidth: "400px",
-                        maxHeight: "400px",
-                      }}
-                      src={`/assets/${assetId}`}
-                      alt={"broken"}
-                    />
-                  )}
+                  <div style={{ display: "inline-block", width: "100%" }}>
+                    {o.assetId}
+                  </div>
+                  <div
+                    style={{
+                      display: "inline-block",
+                    }}
+                  >
+                    {movieSuffixes.find((suffix) =>
+                      o.assetId.toLowerCase().endsWith(suffix)
+                    ) !== undefined ? (
+                      <video
+                        controls
+                        style={{
+                          maxWidth: "400px",
+                          maxHeight: "400px",
+                        }}
+                        src={`/assets/${o.assetId}`}
+                      ></video>
+                    ) : (
+                      <img
+                        style={{
+                          maxWidth: "400px",
+                          maxHeight: "400px",
+                        }}
+                        src={`/assets/${o.assetId}`}
+                        alt={"broken"}
+                      />
+                    )}
+                  </div>
                 </div>
-              </div>
-              <div>
-                <div style={bubbleStyle}>
-                  <h2>responses</h2>
+                <div>
+                  <div style={bubbleStyle}>
+                    <h2>responses</h2>
+                    <div style={bubbleStyle}>
+                      <h3>me</h3>
+                      <div>
+                        score:{" "}
+                        <input
+                          ref={o.scoreRef}
+                          type={"number"}
+                          defaultValue={o.myResponse?.score}
+                        />
+                      </div>
+                      <div>
+                        comment:{" "}
+                        <textarea
+                          ref={o.commentRef}
+                          defaultValue={o.myResponse?.comment}
+                        />
+                      </div>
+                      <div>
+                        <button
+                          onClick={() =>
+                            Promise.resolve()
+                              .then(() => {
+                                if (!myResponses.responses)
+                                  myResponses.responses = {};
+                                myResponses.responses[o.assetKey] = {
+                                  score: parseInt(o.scoreRef.current!.value),
+                                  comment: o.commentRef.current!.value,
+                                };
+                              })
+                              .then(() => firebase.setData(myResponses))
+                          }
+                        >
+                          update
+                        </button>
+                      </div>
+                    </div>
+                    <div>
+                      {Object.entries(props.state)
+                        .map(([userId, data]) => ({
+                          userId,
+                          data,
+                        }))
+                        .map(({ userId, data }) => ({
+                          userId,
+                          userName: data.userName,
+                          responseData: data.responses?.[o.assetKey]!,
+                        }))
+                        .filter(
+                          ({ userId, responseData }) =>
+                            responseData && userId !== props.myId
+                        )
+                        .map(({ userId, responseData, userName }) => (
+                          <div key={userId}>
+                            <div>user: {userName}</div>
+                            <div>score: {responseData.score}</div>
+                            <div>comment: {responseData.comment}</div>
+                          </div>
+                        ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
     </div>
   );
 }

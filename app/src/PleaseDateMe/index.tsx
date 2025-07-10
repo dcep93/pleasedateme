@@ -22,7 +22,7 @@ class Wrapper extends FirebaseWrapper<StateType> {
           firebase.setData({
             userId: myStorageValue.myId,
             userName: myStorageValue.myName,
-            responses: this.state.state[myStorageValue.myId]?.responses,
+            responses: this.state.state[myStorageValue.myId]?.responses || {},
           })
         )
         .then(() =>
@@ -69,7 +69,11 @@ class Wrapper extends FirebaseWrapper<StateType> {
             <button onClick={submit}>update</button>
           </div>
         </div>
-        <Assets state={this.state.state} />
+        <Assets
+          state={this.state?.state || {}}
+          myId={myStorageValue.myId}
+          myName={myStorageValue.myName}
+        />
       </div>
     );
   }
