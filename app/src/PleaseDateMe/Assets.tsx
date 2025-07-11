@@ -15,6 +15,7 @@ export const bubbleStyle = {
 export type StateType = { [userId: string]: DataType };
 
 const assets = [
+  "2025_07_11.mp4",
   "0032.jpg",
   "0037.jpg",
   "0050.jpg",
