@@ -11,7 +11,7 @@ import {
   set,
 } from "firebase/database";
 
-const project = "pleasedateme";
+// const project = "pleasedateme";
 
 const config = {
   // databaseURL: `https://${project}-default-rtdb.firebaseio.com/`,
