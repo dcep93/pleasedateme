@@ -37,12 +37,6 @@ class Wrapper extends FirebaseWrapper<StateType> {
       const myId = Math.floor(Date.now()).toString();
       Promise.resolve()
         .then(() =>
-          firebase.setData({
-            userId: myId,
-            userName: myId,
-          })
-        )
-        .then(() =>
           localStorage.setItem(
             storageKey,
             JSON.stringify({ myId, myName: myId })
