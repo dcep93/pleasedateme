@@ -14,9 +14,16 @@ import {
 const project = "pleasedateme";
 
 const config = {
-  databaseURL: `https://${project}-default-rtdb.firebaseio.com/`,
-  authDomain: `${project}.firebaseapp.com`,
-  // apiKey:  // public, needed for auth
+  // databaseURL: `https://${project}-default-rtdb.firebaseio.com/`,
+  // authDomain: `${project}.firebaseapp.com`,
+  apiKey: "AIzaSyDyO07APwWqurb_qQZRbeZe0x9_AgHKdrY",
+  authDomain: "pleasedateme.firebaseapp.com",
+  databaseURL: "https://pleasedateme-default-rtdb.firebaseio.com",
+  projectId: "pleasedateme",
+  storageBucket: "pleasedateme.firebasestorage.app",
+  messagingSenderId: "258069161432",
+  appId: "1:258069161432:web:337b08ae7cd32012757ead",
+  measurementId: "G-GY1V15VQL5",
 };
 
 var database: Database;
