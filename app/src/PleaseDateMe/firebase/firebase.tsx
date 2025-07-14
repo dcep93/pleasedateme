@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app"; // no compat for new SDK
+import { FirebaseApp, initializeApp } from "firebase/app"; // no compat for new SDK
 import {
   Auth,
   getAuth,
@@ -48,6 +48,7 @@ if (!window.firebaseinitialized) {
   var app = initializeApp(config);
   database = getDatabase(app);
   auth = getAuth(app);
+  getAnalytics(app);
   provider = new GoogleAuthProvider();
 }
 
@@ -87,3 +88,6 @@ const ex = {
 };
 
 export default ex;
+function getAnalytics(app: FirebaseApp) {
+  throw new Error("Function not implemented.");
+}
