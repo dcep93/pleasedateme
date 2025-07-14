@@ -66,7 +66,6 @@ export default function Assets(props: {
                   style={{
                     display: "inline-flex",
                     flexDirection: "column",
-                    minWidth: 0,
                     alignItems: "flex-start",
                     width: "auto",
                   }}
