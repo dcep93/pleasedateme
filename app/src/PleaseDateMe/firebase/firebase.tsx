@@ -1,4 +1,5 @@
-import { FirebaseApp, initializeApp } from "firebase/app"; // no compat for new SDK
+import { getAnalytics } from "firebase/analytics";
+import { initializeApp } from "firebase/app"; // no compat for new SDK
 import {
   Auth,
   getAuth,
@@ -86,8 +87,4 @@ const ex = {
   auth: auth!,
   provider: provider!,
 };
-
 export default ex;
-function getAnalytics(app: FirebaseApp) {
-  throw new Error("Function not implemented.");
-}
