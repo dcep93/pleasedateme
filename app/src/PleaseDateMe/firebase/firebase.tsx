@@ -1,4 +1,4 @@
-import { getAnalytics } from "firebase/analytics";
+import { Analytics, getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app"; // no compat for new SDK
 import {
   Auth,
@@ -34,6 +34,7 @@ const config = {
 
 var database: Database;
 var auth: Auth;
+var analytics: Analytics;
 var provider: GoogleAuthProvider;
 type ResultType = { val: () => BlobType | null };
 type BlobType = any;
@@ -49,7 +50,7 @@ if (!window.firebaseinitialized) {
   var app = initializeApp(config);
   database = getDatabase(app);
   auth = getAuth(app);
-  getAnalytics(app);
+  analytics = getAnalytics(app);
   provider = new GoogleAuthProvider();
 }
 
@@ -86,5 +87,6 @@ const ex = {
   signInWithPopup,
   auth: auth!,
   provider: provider!,
+  analytics: analytics!,
 };
 export default ex;
