@@ -1,5 +1,10 @@
 import { initializeApp } from "firebase/app"; // no compat for new SDK
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+  Auth,
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 import {
   Database,
   get,
@@ -27,7 +32,7 @@ const config = {
 };
 
 var database: Database;
-// var auth: Auth;
+var auth: Auth;
 var provider: GoogleAuthProvider;
 type ResultType = { val: () => BlobType | null };
 type BlobType = any;
@@ -42,7 +47,7 @@ if (!window.firebaseinitialized) {
   window.firebaseinitialized = true;
   var app = initializeApp(config);
   database = getDatabase(app);
-  // auth = getAuth(app);
+  auth = getAuth(app);
   provider = new GoogleAuthProvider();
 }
 
@@ -77,7 +82,7 @@ const ex = {
   _push,
   _delete,
   signInWithPopup,
-  // auth: auth!,
+  auth: auth!,
   provider: provider!,
 };
 
