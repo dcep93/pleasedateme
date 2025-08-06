@@ -7,7 +7,7 @@ export default function PleaseDateMe() {
   return <Wrapper />;
 }
 
-const storageKey = "me";
+const storageKey = "pleasedateme";
 
 const myStorageValue: { myId: string; myName: string } = JSON.parse(
   localStorage.getItem(storageKey) || "{}"
