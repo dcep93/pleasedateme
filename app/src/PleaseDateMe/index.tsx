@@ -15,6 +15,7 @@ const myStorageValue: { myId: string; myName: string } = JSON.parse(
 
 class Wrapper extends FirebaseWrapper<StateType> {
   render(): JSX.Element {
+    if (true) return <div>come back later</div>;
     const ref = createRef<HTMLInputElement>();
     const setMyName = (myName: string) =>
       Promise.resolve()
