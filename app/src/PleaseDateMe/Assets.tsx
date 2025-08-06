@@ -1,7 +1,7 @@
 import { createRef } from "react";
 import firebase, { DataType } from "./firebase";
 
-const adminId = "1752103368044";
+const adminId = "1754521537814";
 
 const movieSuffixes = [".mp4", ".mov"];
 
