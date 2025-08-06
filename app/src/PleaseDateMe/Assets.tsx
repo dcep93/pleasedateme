@@ -1,4 +1,4 @@
-import { createRef } from "react";
+import { createRef, useEffect, useState } from "react";
 import firebase, { DataType } from "./firebase";
 
 const adminId = "1754521537814";
@@ -16,36 +16,20 @@ export const bubbleStyle = {
 
 export type StateType = { [userId: string]: DataType };
 
-const assets = [
-  "2025_07_11.mp4",
-  "0032.jpg",
-  "0037.jpg",
-  "0050.jpg",
-  "ace.jpg",
-  "climb.mp4",
-  "IMG_1020.jpeg",
-  "IMG_1092.jpeg",
-  "IMG_1145.jpeg",
-  "IMG_2426.jpeg",
-  "IMG_2429.jpeg",
-  "IMG_2464.jpeg",
-  "IMG_2542.MOV",
-  "IMG_2553.JPG",
-  "IMG_2554.JPG",
-  "IMG_5399.jpeg",
-  "IMG_5400.jpeg",
-  "IMG_6543.JPG",
-  "Resized_20240619_132421.jpeg",
-  "Resized_20240621_183023.jpeg",
-  "Resized_20241225_105315.jpeg",
-  "roses.mp4",
-];
-
 export default function Assets(props: {
   state: StateType;
   myId: string;
   myName: string;
 }) {
+  const [assets, updateAssets] = useState<string[]>([]);
+  useEffect(() => {
+    fetch(
+      "https://api.github.com/repos/dcep93/pleasedateme/contents/app/public/assets"
+    )
+      .then((resp) => resp.json())
+      .then((j) => j.map((jj: { name: string }) => jj.name).sort())
+      .then(updateAssets);
+  }, []);
   const myResponses = props.state[props.myId] || {
     userId: props.myId,
     userName: props.myName,
