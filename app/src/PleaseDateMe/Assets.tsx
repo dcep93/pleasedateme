@@ -34,6 +34,7 @@ export default function Assets(props: {
     userId: props.myId,
     userName: props.myName,
   };
+  if (true) return <div>please come back later</div>;
   return (
     <div>
       {assets
