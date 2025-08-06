@@ -1,6 +1,8 @@
 import { createRef } from "react";
 import firebase, { DataType } from "./firebase";
 
+const adminId = "1752103368044";
+
 const movieSuffixes = [".mp4", ".mov"];
 
 export const bubbleStyle = {
@@ -48,7 +50,6 @@ export default function Assets(props: {
     userId: props.myId,
     userName: props.myName,
   };
-  alert(props.myId);
   return (
     <div>
       {assets
@@ -141,32 +142,31 @@ export default function Assets(props: {
                         </button>
                       </div>
                     </div>
-                    {new URL(window.location.href).searchParams.get("admin") !==
-                      null && (
-                      <div>
-                        {Object.entries(props.state)
-                          .map(([userId, data]) => ({
-                            userId,
-                            data,
-                          }))
-                          .map(({ userId, data }) => ({
-                            userId,
-                            userName: data.userName,
-                            responseData: data.responses?.[o.assetKey]!,
-                          }))
-                          .filter(
-                            ({ userId, responseData }) =>
-                              responseData && userId !== props.myId
-                          )
-                          .map(({ userId, responseData, userName }) => (
-                            <div key={userId}>
-                              <div>user: {userName}</div>
-                              <div>score: {responseData.score}</div>
-                              <div>comment: {responseData.comment}</div>
-                            </div>
-                          ))}
-                      </div>
-                    )}
+                    <div>
+                      {Object.entries(props.state)
+                        .map(([userId, data]) => ({
+                          userId,
+                          data,
+                        }))
+                        .map(({ userId, data }) => ({
+                          userId,
+                          userName: data.userName,
+                          responseData: data.responses?.[o.assetKey]!,
+                        }))
+                        .filter(
+                          ({ userId, responseData }) =>
+                            responseData &&
+                            userId !== props.myId &&
+                            (props.myId === adminId || userId === adminId)
+                        )
+                        .map(({ userId, responseData, userName }) => (
+                          <div key={userId}>
+                            <div>user: {userName}</div>
+                            <div>score: {responseData.score}</div>
+                            <div>comment: {responseData.comment}</div>
+                          </div>
+                        ))}
+                    </div>
                   </div>
                 </div>
               </div>
