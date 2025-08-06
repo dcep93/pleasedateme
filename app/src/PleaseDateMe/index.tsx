@@ -15,16 +15,17 @@ const myStorageValue: { myId: string; myName: string } = JSON.parse(
 
 class Wrapper extends FirebaseWrapper<StateType> {
   render(): JSX.Element {
-    if (true) return <div>come back later</div>;
     const ref = createRef<HTMLInputElement>();
     const setMyName = (myName: string) =>
       Promise.resolve()
-        .then(() =>
-          firebase.setData({
-            userId: myStorageValue.myId,
-            userName: myStorageValue.myName,
-            responses: this.state.state?.[myStorageValue.myId]?.responses || {},
-          })
+        .then(
+          () =>
+            this.state?.state?.[myStorageValue.myId] &&
+            firebase.setData({
+              userId: myStorageValue.myId,
+              userName: myStorageValue.myName,
+              responses: this.state.state[myStorageValue.myId].responses || {},
+            })
         )
         .then(() =>
           localStorage.setItem(
