@@ -50,7 +50,14 @@ class Wrapper extends FirebaseWrapper<StateType> {
         .then(() => ref.current!.value)
         .then(setMyName);
     return (
-      <div style={{ backgroundColor: "black" }}>
+      <div
+        style={{
+          backgroundColor: "black",
+          width: "100vW",
+          height: "100vH",
+          overflow: "scroll",
+        }}
+      >
         <div style={bubbleStyle}>
           <h1>pleasedateme</h1>
           <div style={bubbleStyle}>

@@ -72,7 +72,6 @@ export default function Assets(props: {
                         .filter(
                           ({ userId, responseData }) =>
                             responseData &&
-                            userId !== props.userId &&
                             (props.userId === adminId || userId === adminId)
                         )
                         .map(({ userId, responseData, userName }) => (
