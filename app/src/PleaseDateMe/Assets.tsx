@@ -145,7 +145,7 @@ export default function Assets(props: {
                         )
                         .map(({ userId, responseData, userName }) => (
                           <div key={userId}>
-                            <div>user: {userName}</div>
+                            <div>from: {userName}</div>
                             <div>score: {responseData.score}</div>
                             <div>comment: {responseData.comment}</div>
                           </div>
