@@ -53,8 +53,10 @@ class Wrapper extends FirebaseWrapper<StateType> {
       <div style={{ backgroundColor: "black" }}>
         <div style={bubbleStyle}>
           <h1>pleasedateme</h1>
-          <div style={bubbleStyle}>thanks for helping me curate my hinge</div>
-          <div>dcep93@gmail.com</div>
+          <div style={bubbleStyle}>
+            <div>dcep93@gmail.com</div>
+            <div>thanks for helping me curate my hinge</div>
+          </div>
           <div>
             your name:{" "}
             <input
