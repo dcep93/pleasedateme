@@ -58,41 +58,6 @@ export default function Assets(props: {
                 </div>
                 <div>
                   <div>
-                    <div style={bubbleStyle}>
-                      <div>
-                        score 0-100:{" "}
-                        <input
-                          ref={o.scoreRef}
-                          type={"number"}
-                          defaultValue={o.myResponse?.score}
-                        />
-                      </div>
-                      <div>
-                        comment:{" "}
-                        <textarea
-                          ref={o.commentRef}
-                          defaultValue={o.myResponse?.comment}
-                        />
-                      </div>
-                      <div>
-                        <button
-                          onClick={() =>
-                            Promise.resolve()
-                              .then(() => {
-                                if (!myResponses.responses)
-                                  myResponses.responses = {};
-                                myResponses.responses[o.assetKey] = {
-                                  score: parseInt(o.scoreRef.current!.value),
-                                  comment: o.commentRef.current!.value,
-                                };
-                              })
-                              .then(() => firebase.setData(myResponses))
-                          }
-                        >
-                          update
-                        </button>
-                      </div>
-                    </div>
                     <div>
                       {Object.entries(props.state)
                         .map(([userId, data]) => ({
@@ -117,6 +82,41 @@ export default function Assets(props: {
                             <div>comment: {responseData.comment}</div>
                           </div>
                         ))}
+                    </div>
+                  </div>
+                  <div style={bubbleStyle}>
+                    <div>
+                      score 0-100:{" "}
+                      <input
+                        ref={o.scoreRef}
+                        type={"number"}
+                        defaultValue={o.myResponse?.score}
+                      />
+                    </div>
+                    <div>
+                      comment:{" "}
+                      <textarea
+                        ref={o.commentRef}
+                        defaultValue={o.myResponse?.comment}
+                      />
+                    </div>
+                    <div>
+                      <button
+                        onClick={() =>
+                          Promise.resolve()
+                            .then(() => {
+                              if (!myResponses.responses)
+                                myResponses.responses = {};
+                              myResponses.responses[o.assetKey] = {
+                                score: parseInt(o.scoreRef.current!.value),
+                                comment: o.commentRef.current!.value,
+                              };
+                            })
+                            .then(() => firebase.setData(myResponses))
+                        }
+                      >
+                        update
+                      </button>
                     </div>
                   </div>
                 </div>
