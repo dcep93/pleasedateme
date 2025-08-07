@@ -5,7 +5,7 @@ set -euo pipefail
 FMT="$1"
 DESTINATION="$2"
 
-cd ../../
+cd ../
 
 CURRENT_TIME="$(TZ='America/New_York' date)"
 GIT_LOG="$(git log -1)"
