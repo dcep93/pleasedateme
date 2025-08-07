@@ -3,7 +3,7 @@
 set -euo pipefail
 
 DESTINATION="app/src/PleaseDateMe/recorded_sha.tsx"
-FMT='const recorded_sha = \`%s\n%s\`;\nexport default recorded_sha;\n'
+FMT='const recorded_sha = `%s\n%s`;\nexport default recorded_sha;\n'
 
 CURRENT_TIME="$(TZ='America/New_York' date)"
 GIT_LOG="$(git log -1)"
