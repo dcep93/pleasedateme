@@ -18,8 +18,8 @@ export type StateType = { [userId: string]: DataType };
 
 export default function Assets(props: {
   state: StateType;
-  myId: string;
-  myName: string;
+  userId: string;
+  userName: string;
 }) {
   const [assets, updateAssets] = useState<string[]>([]);
   useEffect(() => {
@@ -30,11 +30,10 @@ export default function Assets(props: {
       .then((j) => j.map((jj: { name: string }) => jj.name).sort())
       .then(updateAssets);
   }, []);
-  const myResponses = props.state[props.myId] || {
-    userId: props.myId,
-    userName: props.myName,
+  const myResponses = props.state[props.userId] || {
+    userId: props.userId,
+    userName: props.userName,
   };
-  if (true) return <div>please come back later</div>;
   return (
     <div>
       {assets
@@ -141,8 +140,8 @@ export default function Assets(props: {
                         .filter(
                           ({ userId, responseData }) =>
                             responseData &&
-                            userId !== props.myId &&
-                            (props.myId === adminId || userId === adminId)
+                            userId !== props.userId &&
+                            (props.userId === adminId || userId === adminId)
                         )
                         .map(({ userId, responseData, userName }) => (
                           <div key={userId}>

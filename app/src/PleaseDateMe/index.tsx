@@ -9,23 +9,23 @@ export default function PleaseDateMe() {
 
 const storageKey = "pleasedateme";
 
-const myStorageValue: { myId: string; myName: string } = JSON.parse(
+const myStorageValue: { userId: string; userName: string } = JSON.parse(
   localStorage.getItem(storageKey) || "{}"
 );
 
 class Wrapper extends FirebaseWrapper<StateType> {
   render(): JSX.Element {
     const ref = createRef<HTMLInputElement>();
-    const setMyName = (myName: string) =>
+    const setMyName = (userName: string) =>
       Promise.resolve()
-        .then(() => Object.assign(myStorageValue, { myName }))
+        .then(() => Object.assign(myStorageValue, { userName }))
         .then(
           () =>
-            this.state?.state?.[myStorageValue.myId] &&
+            this.state?.state?.[myStorageValue.userName] &&
             firebase.setData({
-              userId: myStorageValue.myId,
-              userName: myStorageValue.myName,
-              responses: this.state.state[myStorageValue.myId].responses || {},
+              ...myStorageValue,
+              responses:
+                this.state.state[myStorageValue.userId].responses || {},
             })
         )
         .then(() =>
@@ -33,13 +33,13 @@ class Wrapper extends FirebaseWrapper<StateType> {
         )
         .then(() => window.location.reload());
 
-    if (!myStorageValue.myId) {
-      const myId = Math.floor(Date.now()).toString();
+    if (!myStorageValue.userId) {
+      const userId = Math.floor(Date.now()).toString();
       Promise.resolve()
         .then(() =>
           localStorage.setItem(
             storageKey,
-            JSON.stringify({ myId, myName: myId })
+            JSON.stringify({ userId, userName: userId })
           )
         )
         .then(() => window.location.reload());
@@ -58,16 +58,12 @@ class Wrapper extends FirebaseWrapper<StateType> {
             <input
               ref={ref}
               onSubmit={submit}
-              defaultValue={myStorageValue.myName}
+              defaultValue={myStorageValue.userName}
             />
             <button onClick={submit}>update</button>
           </div>
         </div>
-        <Assets
-          state={this.state?.state || {}}
-          myId={myStorageValue.myId}
-          myName={myStorageValue.myName}
-        />
+        <Assets state={this.state?.state || {}} {...myStorageValue} />
       </div>
     );
   }
