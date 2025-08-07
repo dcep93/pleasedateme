@@ -53,6 +53,7 @@ class Wrapper extends FirebaseWrapper<StateType> {
       <div>
         <div style={bubbleStyle}>
           <h1>pleasedateme</h1>
+          <div style={bubbleStyle}>thanks for helping me curate my hinge</div>
           <div>
             your name:{" "}
             <input
