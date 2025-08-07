@@ -19,7 +19,13 @@ class Wrapper extends FirebaseWrapper<StateType> {
     const setMyName = (myName: string) =>
       Promise.resolve()
         .then(() =>
-          alert(JSON.stringify([this.state?.state, myStorageValue.myId]))
+          alert(
+            JSON.stringify([
+              this.state?.state,
+              myStorageValue.myId,
+              this.state?.state?.[myStorageValue.myId],
+            ])
+          )
         )
         .then(
           () =>
