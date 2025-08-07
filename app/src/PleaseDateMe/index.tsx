@@ -21,7 +21,7 @@ class Wrapper extends FirebaseWrapper<StateType> {
         .then(() => Object.assign(myStorageValue, { userName }))
         .then(
           () =>
-            this.state?.state?.[myStorageValue.userName] &&
+            this.state?.state?.[myStorageValue.userId] &&
             firebase.setData({
               ...myStorageValue,
               responses:
