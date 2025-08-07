@@ -9,6 +9,8 @@ cd ../
 
 pwd
 
+ls -ltha
+
 CURRENT_TIME="$(TZ='America/New_York' date)"
 GIT_LOG="$(git log -1)"
 
