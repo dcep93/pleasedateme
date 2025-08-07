@@ -111,7 +111,7 @@ export default function Assets(props: {
                               if (!myResponses.responses)
                                 myResponses.responses = {};
                               myResponses.responses[o.assetKey] = {
-                                score: parseInt(o.scoreRef.current!.value),
+                                score: parseInt(o.scoreRef.current!.value) || 0,
                                 comment: o.commentRef.current!.value,
                               };
                             })
