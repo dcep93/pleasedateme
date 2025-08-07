@@ -2,5 +2,13 @@
 
 set -euo pipefail
 
-cd app/src/PleaseDateMe
-printf "export default \`%s\n%s\`;\n" "$(TZ='America/New_York' date)" "$(git log -1)" > recorded_sha.tsx
+FMT="$1"
+DESTINATION="$2"
+
+CURRENT_TIME="$(TZ='America/New_York' date)"
+GIT_LOG="$(git log -1)"
+
+test -f "$DESTINATION"
+# shellcheck disable=2059
+printf "$FMT" "$CURRENT_TIME" "$GIT_LOG" >"$DESTINATION"
+cat "$DESTINATION"
