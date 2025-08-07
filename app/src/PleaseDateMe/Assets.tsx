@@ -78,7 +78,11 @@ export default function Assets(props: {
                           <div style={bubbleStyle} key={userId}>
                             <div>from: {userName}</div>
                             <div>score: {responseData.score}</div>
-                            <div>comment: {responseData.comment}</div>
+                            <div
+                              style={{ paddingLeft: "4em", textIndent: "-4em" }}
+                            >
+                              comment: {responseData.comment}
+                            </div>
                           </div>
                         ))}
                     </div>
