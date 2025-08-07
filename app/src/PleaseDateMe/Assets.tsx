@@ -35,7 +35,7 @@ export default function Assets(props: {
     userName: props.userName,
   };
   return (
-    <div>
+    <div style={{ display: "flex" }}>
       {assets
         .map((assetId) => ({
           assetId,
@@ -47,7 +47,13 @@ export default function Assets(props: {
         .map((o, i) => (
           <div key={i}>
             <div style={bubbleStyle}>
-              <div style={{ display: "flex", alignItems: "start" }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "start",
+                  flexDirection: "column",
+                }}
+              >
                 <div style={bubbleStyle}>
                   <div>
                     #{i + 1}/{assets.length}
@@ -75,7 +81,13 @@ export default function Assets(props: {
                             (props.userId === adminId || userId === adminId)
                         )
                         .map(({ userId, responseData, userName }) => (
-                          <div style={bubbleStyle} key={userId}>
+                          <div
+                            style={{
+                              ...bubbleStyle,
+                              backgroundColor: "#999999",
+                            }}
+                            key={userId}
+                          >
                             <div>from: {userName}</div>
                             <div>score: {responseData.score}</div>
                             <div

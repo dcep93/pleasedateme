@@ -57,22 +57,23 @@ class Wrapper extends FirebaseWrapper<StateType> {
           width: "100vW",
           height: "100vH",
           overflow: "scroll",
+          display: "flex",
         }}
       >
-        <div style={bubbleStyle}>
-          <h1 title={recorded_sha}>PleaseDateMe</h1>
+        <div>
           <div style={bubbleStyle}>
-            <div>dcep93@gmail.com</div>
-            <div>thanks for helping me curate my hinge</div>
-          </div>
-          <div>
-            your name:{" "}
-            <input
-              ref={ref}
-              onSubmit={submit}
-              defaultValue={myStorageValue.userName}
-            />
-            <button onClick={submit}>update</button>
+            <h1 title={recorded_sha}>PleaseDateMe</h1>
+            <div style={bubbleStyle}>dcep93@gmail.com</div>
+            <div style={bubbleStyle}>thanks for helping me curate my hinge</div>
+            <div>
+              your name:{" "}
+              <input
+                ref={ref}
+                onSubmit={submit}
+                defaultValue={myStorageValue.userName}
+              />
+              <button onClick={submit}>update</button>
+            </div>
           </div>
         </div>
         <Assets state={this.state?.state || {}} {...myStorageValue} />
