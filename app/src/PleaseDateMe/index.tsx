@@ -60,7 +60,7 @@ class Wrapper extends FirebaseWrapper<StateType> {
         }}
       >
         <div style={bubbleStyle}>
-          <h1 title={recorded_sha}>pleasedateme</h1>
+          <h1 title={recorded_sha}>PleaseDateMe</h1>
           <div style={bubbleStyle}>
             <div>dcep93@gmail.com</div>
             <div>thanks for helping me curate my hinge</div>
