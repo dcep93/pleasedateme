@@ -50,10 +50,11 @@ class Wrapper extends FirebaseWrapper<StateType> {
         .then(() => ref.current!.value)
         .then(setMyName);
     return (
-      <div>
+      <div style={{ backgroundColor: "black" }}>
         <div style={bubbleStyle}>
           <h1>pleasedateme</h1>
           <div style={bubbleStyle}>thanks for helping me curate my hinge</div>
+          <div>dcep93@gmail.com</div>
           <div>
             your name:{" "}
             <input

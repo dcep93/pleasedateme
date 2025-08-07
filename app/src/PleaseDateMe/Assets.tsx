@@ -47,53 +47,20 @@ export default function Assets(props: {
         .map((o, i) => (
           <div key={i}>
             <div style={bubbleStyle}>
-              <div style={{ display: "flex" }}>
-                <div
-                  style={{
-                    display: "inline-flex",
-                    flexDirection: "column",
-                    alignItems: "flex-start",
-                    width: "auto",
-                  }}
-                >
+              <div style={{ display: "flex", alignItems: "start" }}>
+                <div style={bubbleStyle}>
+                  <div>
+                    {i + 1}/{assets.length}
+                  </div>
                   <div style={{ display: "inline-block", width: "100%" }}>
                     {o.assetId}
                   </div>
-                  <div
-                    style={{
-                      display: "inline-block",
-                    }}
-                  >
-                    {movieSuffixes.find((suffix) =>
-                      o.assetId.toLowerCase().endsWith(suffix)
-                    ) !== undefined ? (
-                      <video
-                        controls
-                        style={{
-                          maxWidth: "400px",
-                          maxHeight: "400px",
-                        }}
-                        src={`/assets/${o.assetId}`}
-                      ></video>
-                    ) : (
-                      <img
-                        style={{
-                          maxWidth: "400px",
-                          maxHeight: "400px",
-                        }}
-                        src={`/assets/${o.assetId}`}
-                        alt={"broken"}
-                      />
-                    )}
-                  </div>
                 </div>
                 <div>
-                  <div style={bubbleStyle}>
-                    <h2>responses</h2>
+                  <div>
                     <div style={bubbleStyle}>
-                      <h3>me</h3>
                       <div>
-                        score:{" "}
+                        score 0-100:{" "}
                         <input
                           ref={o.scoreRef}
                           type={"number"}
@@ -144,13 +111,49 @@ export default function Assets(props: {
                             (props.userId === adminId || userId === adminId)
                         )
                         .map(({ userId, responseData, userName }) => (
-                          <div key={userId}>
+                          <div style={bubbleStyle} key={userId}>
                             <div>from: {userName}</div>
                             <div>score: {responseData.score}</div>
                             <div>comment: {responseData.comment}</div>
                           </div>
                         ))}
                     </div>
+                  </div>
+                </div>
+                <div
+                  style={{
+                    display: "inline-flex",
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                    width: "auto",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "inline-block",
+                    }}
+                  >
+                    {movieSuffixes.find((suffix) =>
+                      o.assetId.toLowerCase().endsWith(suffix)
+                    ) !== undefined ? (
+                      <video
+                        controls
+                        style={{
+                          maxWidth: "400px",
+                          maxHeight: "400px",
+                        }}
+                        src={`/assets/${o.assetId}`}
+                      ></video>
+                    ) : (
+                      <img
+                        style={{
+                          maxWidth: "400px",
+                          maxHeight: "400px",
+                        }}
+                        src={`/assets/${o.assetId}`}
+                        alt={"broken"}
+                      />
+                    )}
                   </div>
                 </div>
               </div>
