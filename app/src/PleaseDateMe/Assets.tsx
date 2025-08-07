@@ -79,7 +79,7 @@ export default function Assets(props: {
                             <div>from: {userName}</div>
                             <div>score: {responseData.score}</div>
                             <div
-                              style={{ paddingLeft: "4em", textIndent: "-4em" }}
+                              style={{ paddingLeft: "2em", textIndent: "-2em" }}
                             >
                               comment: {responseData.comment}
                             </div>
