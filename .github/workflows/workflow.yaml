@@ -10,6 +10,6 @@ jobs:
         with:
           fetch-depth: 2
           submodules: true
-      - run: bash .github/workflows/record_sha.sh "const recorded_sha = `%s\n%s`;\nexport default recorded_sha;\n" "app/src/PleaseDateMe/recorded_sha.tsx"
+      - run: bash .github/workflows/record_sha.sh "const recorded_sha = \`%s\n%s\`;\nexport default recorded_sha;\n" "app/src/PleaseDateMe/recorded_sha.tsx"
       - run: bash .github/workflows/build_react.sh
       - run: bash .github/workflows/deploy_to_firebase.sh '${{ secrets.SA_KEY }}'
