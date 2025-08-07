@@ -21,8 +21,7 @@ class Wrapper extends FirebaseWrapper<StateType> {
         .then(() =>
           alert(
             JSON.stringify([
-              this.state?.state,
-              myStorageValue.myId,
+              myStorageValue,
               this.state?.state?.[myStorageValue.myId],
             ])
           )
