@@ -7,6 +7,8 @@ DESTINATION="$2"
 
 cd ../
 
+pwd
+
 CURRENT_TIME="$(TZ='America/New_York' date)"
 GIT_LOG="$(git log -1)"
 
