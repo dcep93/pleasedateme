@@ -5,8 +5,6 @@ set -euo pipefail
 FMT="$1"
 DESTINATION="$2"
 
-cd ../
-
 pwd
 
 ls -ltha
