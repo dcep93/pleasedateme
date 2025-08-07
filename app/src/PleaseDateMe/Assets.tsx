@@ -50,7 +50,7 @@ export default function Assets(props: {
               <div style={{ display: "flex", alignItems: "start" }}>
                 <div style={bubbleStyle}>
                   <div>
-                    {i + 1}/{assets.length}
+                    #{i + 1}/{assets.length}
                   </div>
                   <div style={{ display: "inline-block", width: "100%" }}>
                     {o.assetId}
